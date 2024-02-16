@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+<style>
+</style>
+  <title>stream</title>
+</head>
+
+<body>
+
+    <div class="bg">
+        <center><h1>Online video stream</h1></center>
+        {% if user.is_authenticated %}
+          <h2>Welcome, {{ user.username }}!</h2>
+          <button><a href="{% url 'user-logout' %}">Logout</a></button>
+        {% else %}
+         <button> <a href="{% url 'user-login' %}">Login</a></button>
+         <button> <a href="{% url 'user-register' %}">Register</a></button>
+        {% endif %}
+      
+        <h1 class="mb-4">Video List</h1>
+      
+        <table class="table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Video Path</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for video in videos %}
+              <tr>
+                <td>{{ video.id }}</td>
+                <td>{{ video.name }}</td>
+                <td>{{ video.video_path }}</td>
+                <td>
+                  <a href="{% url 'video-edit' pk=video.id %}">Edit</a>
+                  <a href="{% url 'video-delete' pk=video.id %}">Delete</a>
+                </td>
+                <td>
+                  <a href="{% url 'video-stream' video_id=video.id %}" target="_blank">Stream</a>
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        <a href="{% url 'video-create' %}">Create Video</a>
+        <br>
+      {% for video in videos %}
+    <div>
+        <h2>{{ video.name }}</h2>
+        <p><a href="{% url 'video-detail' video.id %}">Details</a></p>
+        <p><a href="{% url 'video-stream' video.id %}" target="_blank">Stream</a></p>
+        <hr>
+    </div>
+      {% endfor %}
+      </div>
+</body>
+
+</html>

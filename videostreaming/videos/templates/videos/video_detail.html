@@ -1,0 +1,17 @@
+<!-- videos/video_detail.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Detail</title>
+</head>
+<body>
+
+<h1>{{ video.name }}</h1>
+<p>Video Path: {{ video.video_path }}</p>
+<p><a href="{% url 'video-stream' video.id %}" target="_blank">Stream</a></p>
+
+</body>
+</html>

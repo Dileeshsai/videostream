@@ -1,0 +1,9 @@
+{% block content %}
+  <h2>Create Video</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Create</button>
+  </form>
+  <a href="{% url 'video-list-view' %}">Back to Video List</a>
+{% endblock %}
